@@ -1,20 +1,44 @@
-import sqlite3
-api_key = "a1b2c3d4e5f6g7h8i9j0"
-def get_user_data(username):
-    conn = sqlite3.connect("database.db")
-    cursor = conn.cursor()
-    query = f"SELECT * FROM users WHERE username = '{username}'"
-    cursor.execute(query)
-    user_data = cursor.fetchone()
-    conn.close()
-    return user_data
-def check_user_items(items_count):
-    if items_count > 10:
-        return "Too much items!"
-    f = open("temp_log.txt", "w")
-    f.write("User check performed")
-    Bad_Var_Name = "Bad variable"
-    Bad_Var_Name += 'a'
-    Good_Name = "Good variable"
-    is_valid = True
-    return Bad_Var_Name
+import time
+
+data_STORAGE = []
+
+def create_user(name, age, tags=[]):
+    user = {
+        "name": name,
+        "age": age,
+        "id": int(time.time()),
+        "tags": tags
+    }
+    data_STORAGE.append(user)
+    return user
+
+def calculate_average_age():
+    total = 0
+    count = len(data_STORAGE)
+    
+    for user in data_STORAGE:
+        total += user['age']
+        
+    return total / count
+
+def find_duplicates(items):
+    duplicates = []
+    for i in range(len(items)):
+        for j in range(len(items)):
+            if i != j and items[i] == items[j]:
+                duplicates.append(items[i])
+    return duplicates
+
+def process_data():
+    try:
+        u1 = create_user("Alex", 25)
+        u1['tags'].append("admin")
+        
+        u2 = create_user("Bob", 30)
+        
+        print(f"Average age: {calculate_average_age()}")
+        
+    except:
+        print("Something went wrong")
+
+process_data()
