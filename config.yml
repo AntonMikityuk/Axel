@@ -1,0 +1,23 @@
+context:
+  language: "Python 3.10"
+  coding_standard: "PEP 8"
+  purpose: "This module is responsible for handling user data from a database."
+
+rules:
+  Security:
+    - "CRITICAL: Identify SQL injection vulnerabilities where user input is formatted directly into a query string using f-strings or '+'."
+    - "HIGH: Identify hardcoded secrets, such as API keys or passwords, defined directly in the code."
+  
+  Correctness_and_Bugs:
+    - "LOW: Ensure resources like file handles, database connections"
+    - "MEDIUM: network sockets, threads are properly closed, preferably using a 'with' statement to prevent resource leaks"
+    - "MEDIUM: Check for unused variables. A variable is unused if it is assigned a value but never read or referenced later. If variable is returned it is considered used and must not be marked as unused variable (for example: n1 = abs and then return n1 means n1 is NOT unused)"
+
+  Readability_and_Maintainability:
+    - "MEDIUM: Ensure functions have a docstring explaining their purpose, arguments, and return value."
+    - "LOW: All variable and function names must follow PEP 8 conventions (e.g., `snake_case` for variables and functions)."
+    - "LOW: Identify 'magic numbers' (unexplained numerical literals) and suggest replacing them with named constants."
+
+model_settings:
+  temperature: 0.1
+  max_new_tokens: 1024
